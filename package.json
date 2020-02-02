@@ -1,0 +1,30 @@
+{
+  "name": "gendiff",
+  "version": "0.0.1",
+  "description": "",
+  "type": "module",
+  "bin": {
+    "gendiff": "src/bin/gendiff.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dmfedotov/frontend-project-lvl2.git"
+  },
+  "author": "mongoose",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dmfedotov/frontend-project-lvl2/issues"
+  },
+  "homepage": "https://github.com/dmfedotov/frontend-project-lvl2#readme",
+  "dependencies": {
+    "commander": "^4.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.20.1"
+  }
+}
