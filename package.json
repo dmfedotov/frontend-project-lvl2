@@ -2,6 +2,7 @@
   "name": "gendiff",
   "version": "0.0.1",
   "description": "",
+  "main": ".src/index.js",
   "type": "module",
   "bin": {
     "gendiff": "src/bin/gendiff.js"
@@ -20,7 +21,8 @@
   },
   "homepage": "https://github.com/dmfedotov/frontend-project-lvl2#readme",
   "dependencies": {
-    "commander": "^4.1.0"
+    "commander": "^4.1.0",
+    "lodash": "^4.17.15"
   },
   "devDependencies": {
     "eslint": "^6.8.0",
