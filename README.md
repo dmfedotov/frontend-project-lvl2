@@ -5,7 +5,14 @@
 
 ## Installation
 ```
-make install
 make publish
 npm link
 ```
+[![asciicast](asciinemas/install-gendiff.svg)](https://asciinema.org/a/BjnJKLsApMqkJmtibQJVcM1fV)
+
+## Usage
+```
+gendiff [options] <firstConfig> <secondConfig>
+```
+## Comparing two JSON files
+[![asciicast](asciinemas/comparing-json.svg)](https://asciinema.org/a/NhEAEr6dk5KRI5BKxSbtzVzRQ)
