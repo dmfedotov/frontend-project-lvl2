@@ -2,8 +2,8 @@ import fs from 'fs';
 import _ from 'lodash';
 
 export default (path1, path2) => {
-  const file1 = JSON.parse(fs.readFileSync(path1, { encoding: 'UTF-8' }));
-  const file2 = JSON.parse(fs.readFileSync(path2, { encoding: 'UTF-8' }));
+  const file1 = JSON.parse(fs.readFileSync(path1, 'utf-8'));
+  const file2 = JSON.parse(fs.readFileSync(path2, 'utf-8'));
   const secondFileNewKeys = _.difference(Object.keys(file2), Object.keys(file1));
 
   const diffArray = Object.entries(file1).reduce((acc, [key, value]) => {
