@@ -13,5 +13,8 @@ lint:
 test:
 	npm test
 
+watch:
+	npm test -- --watch
+
 plain:
 	npx babel-node src/bin/gendiff.js before.json after.json
