@@ -9,11 +9,14 @@
 make publish
 npm link
 ```
-[![asciicast](asciinemas/install-gendiff.svg)](https://asciinema.org/a/BjnJKLsApMqkJmtibQJVcM1fV)
+[![asciicast](asciinemas/install-package.svg)](https://asciinema.org/a/oj2gYxaevMgiBHY5ntXIpch01)
 
 ## Usage
 ```
 gendiff [options] <firstConfig> <secondConfig>
 ```
 ## Comparing two JSON files
-[![asciicast](asciinemas/comparing-json.svg)](https://asciinema.org/a/NhEAEr6dk5KRI5BKxSbtzVzRQ)
+[![asciicast](asciinemas/comparing-json-files.svg)](https://asciinema.org/a/tQTE5Y4DLCxUsPLK9sLDKFQzY)
+
+## Comparing two yaml files
+[![asciicast](asciinemas/comparing-yaml-files.svg)](https://asciinema.org/a/Mo1yHqHjGGc5QAgtIHBStyhAw)
