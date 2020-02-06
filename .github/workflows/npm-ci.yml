@@ -1,9 +1,11 @@
 name: Node.js-CI
+env:
+  TEST_REPORTER_ID: "dd9a5fbca3947ccf4be6d7ab82b51401f7076b493db25fd2d521e363a63344eb"
 
 on: push
 
 jobs:
-  eslint-test:
+  Testing:
 
     runs-on: ubuntu-latest
 
@@ -12,9 +14,9 @@ jobs:
         node-version: [8.x, 10.x, 13.x]
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@master
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@master
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm ci
@@ -24,3 +26,22 @@ jobs:
       run: npm test
       env:
         CI: true
+
+  Test coverage:
+    needs: Testing
+    name: Test coverage
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@master
+    - uses: actions/setup-node@master
+      with:
+        node-version: '13'
+    - run: npm ci
+    - uses: paambaati/codeclimate-action@v2.4.0
+      env:
+        CC_TEST_REPORTER_ID: ${{ env.TEST_REPORTER_ID  }} 
+      with:
+        coverageCommand: npm run coverage
+        debug: true
