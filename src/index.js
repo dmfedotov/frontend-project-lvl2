@@ -1,9 +1,13 @@
-import fs from 'fs';
+import path from 'path';
 import _ from 'lodash';
+import parser from './parsers';
+
 
 export default (path1, path2) => {
-  const file1 = JSON.parse(fs.readFileSync(path1, 'utf-8'));
-  const file2 = JSON.parse(fs.readFileSync(path2, 'utf-8'));
+  const extension = path.extname(path1).slice(1);
+  const file1 = parser(extension)(path1);
+  const file2 = parser(extension)(path2);
+
   const secondFileNewKeys = _.difference(Object.keys(file2), Object.keys(file1));
 
   const diffArray = Object.entries(file1).reduce((acc, [key, value]) => {
