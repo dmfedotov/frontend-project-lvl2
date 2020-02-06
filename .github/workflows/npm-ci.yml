@@ -27,7 +27,7 @@ jobs:
       env:
         CI: true
 
-  Test coverage:
+  Test-coverage:
     needs: Testing
     name: Test coverage
 
