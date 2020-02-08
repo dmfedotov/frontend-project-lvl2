@@ -20,3 +20,6 @@ gendiff [options] <firstConfig> <secondConfig>
 
 ## Comparing two yaml files
 [![asciicast](asciinemas/comparing-yaml-files.svg)](https://asciinema.org/a/Mo1yHqHjGGc5QAgtIHBStyhAw)
+
+## Comparing two ini files
+[![asciicast](asciinemas/comparing-ini-files.svg)](https://asciinema.org/a/cvmE8BI2dMqAZpBIGWiRB5hBe)
