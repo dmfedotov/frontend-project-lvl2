@@ -7,14 +7,10 @@ const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8'
 
 const result = readFile('result.txt').trim();
 
-test('Comparing two JSON files', () => {
-  const path1 = getFixturePath('before.json');
-  const path2 = getFixturePath('after.json');
-  expect(gendiff(path1, path2)).toBe(result);
-});
-
-test('Comparing two yaml files', () => {
-  const path1 = getFixturePath('before.yml');
-  const path2 = getFixturePath('after.yml');
-  expect(gendiff(path1, path2)).toBe(result);
+test.each([
+  ['before.json', 'after.json', result],
+  ['before.yml', 'after.yml', result],
+  ['before.ini', 'after.ini', result],
+])('Comparing %s and %s files', (path1, path2, expected) => {
+  expect(gendiff(getFixturePath(path1), getFixturePath(path2))).toBe(expected);
 });
