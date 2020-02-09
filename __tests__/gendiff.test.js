@@ -5,7 +5,7 @@ import gendiff from '../src';
 const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
 const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8');
 
-const result = readFile('result.txt').trim();
+const result = readFile('result').trim();
 
 test.each([
   ['before.json', 'after.json', result],
