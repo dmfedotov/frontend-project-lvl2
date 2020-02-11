@@ -18,6 +18,12 @@ const iter = (data1, data2, acc) => {
           },
         ];
       }
+      if (typeof valueBefore === 'undefined' && typeof valueAfter !== 'undefined') {
+        return [...innerAcc, { name: key, type: 'added', valueAfter }];
+      }
+      if (typeof valueBefore !== 'undefined' && typeof valueAfter === 'undefined') {
+        return [...innerAcc, { name: key, type: 'deleted', valueBefore }];
+      }
       return [...innerAcc, {
         name: key, type: 'changed', valueBefore, valueAfter,
       }];
