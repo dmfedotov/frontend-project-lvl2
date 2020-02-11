@@ -23,3 +23,6 @@ gendiff [options] <firstConfig> <secondConfig>
 
 ## Comparing two ini files
 [![asciicast](asciinemas/comparing-ini-files.svg)](https://asciinema.org/a/cvmE8BI2dMqAZpBIGWiRB5hBe)
+
+## Comparing two files recursively
+[![asciicast](asciinemas/comparing-json-files-recursively.svg)](https://asciinema.org/a/0SynRyFdmaR92YNsCK0pVHx36)
