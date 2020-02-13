@@ -1,4 +1,4 @@
-import valueStringify from './util';
+import valueStringify from '../util';
 
 const paddingLeft = '    ';
 
