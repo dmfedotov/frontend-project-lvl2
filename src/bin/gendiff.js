@@ -8,7 +8,7 @@ program
   .option('-f, --format [type]', 'output format')
   .arguments('<firstConfig> <secondConfig>')
   .action((pathToFile1, pathToFile2) => {
-    console.log(genDiff(pathToFile1, pathToFile2));
+    console.log(genDiff(pathToFile1, pathToFile2, program.format));
   });
 
 program.parse(process.argv);
