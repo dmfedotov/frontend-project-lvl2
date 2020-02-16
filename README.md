@@ -29,3 +29,6 @@ gendiff [options] <firstConfig> <secondConfig>
 
 ## Comparing two files recursively in plain format
 [![asciicast](asciinemas/comparing-files-recursively-plain.svg)](https://asciinema.org/a/8Q0LgT9L1QVD2QD7kBM2gOznx)
+
+## Comparing two files in JSON format
+[![asciicast](asciinemas/comparing-files-in-json.svg)](https://asciinema.org/a/cGl1T2dHRXiYAIdcpiidMGiTU)
