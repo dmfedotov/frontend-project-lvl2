@@ -17,6 +17,7 @@ describe('Comparing files in complex format', () => {
   });
 });
 
+
 describe('Comparing files in plain format', () => {
   const plain = readFile('plain').trim();
 
@@ -24,6 +25,18 @@ describe('Comparing files in plain format', () => {
     ['before.json', 'after.json', 'plain', plain],
     ['before.yml', 'after.yml', 'plain', plain],
     ['before.ini', 'after.ini', 'plain', plain],
+  ])('%s and %s', (path1, path2, format, expected) => {
+    expect(gendiff(getFixturePath(path1), getFixturePath(path2), format)).toBe(expected);
+  });
+});
+
+describe('Comparing files in JSON format', () => {
+  const json = readFile('json').trim();
+
+  test.each([
+    ['before.json', 'after.json', 'json', json],
+    ['before.yml', 'after.yml', 'json', json],
+    ['before.ini', 'after.ini', 'json', json],
   ])('%s and %s', (path1, path2, format, expected) => {
     expect(gendiff(getFixturePath(path1), getFixturePath(path2), format)).toBe(expected);
   });
