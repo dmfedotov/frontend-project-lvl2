@@ -1,13 +1,12 @@
-import fs from 'fs';
 import yaml from 'js-yaml';
 import ini from 'ini';
 
-export default (extension, pathToFile) => {
+export default (extension, file) => {
   const map = {
-    json: (path) => JSON.parse(fs.readFileSync(path, 'utf-8')),
-    yml: (path) => yaml.safeLoad(fs.readFileSync(path, 'utf-8')),
-    ini: (path) => ini.parse(fs.readFileSync(path, 'utf-8')),
+    json: (data) => JSON.parse(data),
+    yml: (data) => yaml.safeLoad(data),
+    ini: (data) => ini.parse(data),
   };
 
-  return map[extension](pathToFile);
+  return map[extension](file);
 };
