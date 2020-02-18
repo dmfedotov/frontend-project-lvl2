@@ -15,7 +15,7 @@ const stringify = (value, depth) => {
 const renderNode = (node, depth) => {
   const { type } = node;
 
-  const typeToString = {
+  const typeToValue = {
     nested: `${padding.repeat(depth)}${node.name}: {\n`,
     unchanged: `${padding.repeat(depth)}${node.name}: ${stringify(node.value, depth)}`,
     deleted: `${padding.repeat(depth - 1)}  - ${node.name}: ${stringify(node.valueBefore, depth)}`,
@@ -23,13 +23,13 @@ const renderNode = (node, depth) => {
   };
 
   if (type === 'changed') {
-    return `${typeToString.deleted}${typeToString.added}`;
+    return `${typeToValue.deleted}${typeToValue.added}`;
   }
 
-  return typeToString[type];
+  return typeToValue[type];
 };
 
-const renderTree = (diff) => {
+const renderDiff = (ast) => {
   const iter = (node, acc, depth) => node.reduce((inAcc, inNode) => {
     if (inNode.type === 'nested') {
       return [
@@ -41,8 +41,8 @@ const renderTree = (diff) => {
     return [...inAcc, renderNode(inNode, depth)].join('');
   }, acc);
 
-  const result = iter(diff, [], 1).trimEnd();
+  const result = iter(ast, [], 1).trimEnd();
   return `{\n${result}\n}`;
 };
 
-export default renderTree;
+export default renderDiff;
