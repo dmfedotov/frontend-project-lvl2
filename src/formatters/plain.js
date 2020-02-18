@@ -16,13 +16,13 @@ const renderNode = (node, name) => {
 
 const renderDiff = (ast) => {
   const iter = (node, acc, ancestry) => node.reduce((inAcc, inNode) => {
-    const { name } = inNode;
+    const { name, type } = inNode;
     const newAncestry = `${ancestry}.${name}`;
 
-    if (inNode.children) {
+    if (type === 'nested') {
       return [...inAcc, iter(inNode.children, [], `${newAncestry}`)].join('');
     }
-    if (inNode.type === 'unchanged') {
+    if (type === 'unchanged') {
       return inAcc;
     }
 
