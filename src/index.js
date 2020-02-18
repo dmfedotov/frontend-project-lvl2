@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import buildAst from './diff';
+import buildDiff from './diff';
 import parse from './parsers';
 import render from './formatters';
 
@@ -11,7 +11,7 @@ export default (path1, path2, format = 'complex') => {
 
   const data1 = parse(extension, file1);
   const data2 = parse(extension, file2);
-  const diff = buildAst(data1, data2);
+  const diff = buildDiff(data1, data2);
 
   return render[format](diff);
 };
