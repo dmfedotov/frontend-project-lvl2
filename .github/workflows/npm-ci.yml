@@ -23,23 +23,7 @@ jobs:
     - name: Run eslint
       run: make lint
     - name: Run tests
-      run: npm test
-      env:
-        CI: true
-
-  Test-coverage:
-    needs: Testing
-    name: Test coverage
-
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@master
-    - uses: actions/setup-node@master
-      with:
-        node-version: '13'
-    - run: npm ci
-    - uses: paambaati/codeclimate-action@v2.4.0
+      uses: paambaati/codeclimate-action@v2.4.0
       env:
         CC_TEST_REPORTER_ID: ${{ env.TEST_REPORTER_ID  }} 
       with:
