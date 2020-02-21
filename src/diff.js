@@ -3,6 +3,9 @@ import { union, isEqual, isObject } from 'lodash';
 const buildNode = (name, ...values) => {
   const [valueBefore, valueAfter] = values;
 
+  if (isEqual(valueBefore, valueAfter)) {
+    return { name, type: 'unchanged', value: valueBefore };
+  }
   if (!valueBefore) {
     return { name, type: 'added', valueAfter };
   }
@@ -23,15 +26,11 @@ const buildAst = (data1, data2, acc) => {
     const valueAfter = data2[key];
     const hasChildren = isObject(valueBefore) && isObject(valueAfter);
 
-    if (!isEqual(valueBefore, valueAfter)) {
-      if (hasChildren) {
-        return { name: key, type: 'nested', children: buildAst(valueBefore, valueAfter, []) };
-      }
-
-      return buildNode(key, valueBefore, valueAfter);
+    if (hasChildren) {
+      return { name: key, type: 'nested', children: buildAst(valueBefore, valueAfter, []) };
     }
 
-    return { name: key, type: 'unchanged', value: valueBefore };
+    return buildNode(key, valueBefore, valueAfter);
   }, acc);
 
   return ast;
