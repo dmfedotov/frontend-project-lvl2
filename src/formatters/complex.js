@@ -3,13 +3,13 @@ import { isObject } from 'lodash';
 const padding = '    ';
 
 const stringify = (value, depth) => {
-  if (isObject(value)) {
-    const keys = Object.keys(value);
-    const newValue = keys.map((key) => `${padding.repeat(depth + 1)}${key}: ${value[key]}\n`).join('');
-    return `{\n${newValue}${padding.repeat(depth)}}\n`;
+  if (!isObject(value)) {
+    return `${value}\n`;
   }
 
-  return `${value}\n`;
+  const keys = Object.keys(value);
+  const newValue = keys.map((key) => `${padding.repeat(depth + 1)}${key}: ${value[key]}\n`).join('');
+  return `{\n${newValue}${padding.repeat(depth)}}\n`;
 };
 
 const renderNode = (node, depth) => {
