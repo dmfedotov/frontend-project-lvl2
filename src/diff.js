@@ -1,23 +1,5 @@
 import { union, isEqual, isObject } from 'lodash';
 
-const buildNode = (name, ...values) => {
-  const [valueBefore, valueAfter] = values;
-
-  if (isEqual(valueBefore, valueAfter)) {
-    return { name, type: 'unchanged', value: valueBefore };
-  }
-  if (!valueBefore) {
-    return { name, type: 'added', valueAfter };
-  }
-  if (!valueAfter) {
-    return { name, type: 'deleted', valueBefore };
-  }
-
-  return {
-    name, type: 'changed', valueBefore, valueAfter,
-  };
-};
-
 const buildAst = (data1, data2, acc) => {
   const keys = union(Object.keys(data1), Object.keys(data2)).sort();
 
@@ -29,8 +11,19 @@ const buildAst = (data1, data2, acc) => {
     if (hasChildren) {
       return { name: key, type: 'nested', children: buildAst(valueBefore, valueAfter, []) };
     }
+    if (isEqual(valueBefore, valueAfter)) {
+      return { name: key, type: 'unchanged', value: valueBefore };
+    }
+    if (!valueBefore) {
+      return { name: key, type: 'added', valueAfter };
+    }
+    if (!valueAfter) {
+      return { name: key, type: 'deleted', valueBefore };
+    }
 
-    return buildNode(key, valueBefore, valueAfter);
+    return {
+      name: key, type: 'changed', valueBefore, valueAfter,
+    };
   }, acc);
 
   return ast;
