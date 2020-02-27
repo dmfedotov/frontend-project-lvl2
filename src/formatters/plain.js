@@ -2,34 +2,19 @@ import { isObject } from 'lodash';
 
 const stringify = (value) => (isObject(value) ? '[complex value]' : `'${value}'`);
 
-const renderNode = (node, name) => {
-  const { type } = node;
-
-  const typeToValue = {
-    added: `Property '${name}' was added with value: ${stringify(node.valueAfter)}`,
-    deleted: `Property '${name}' was deleted`,
-    changed: `Property '${name}' was changed from ${stringify(node.valueBefore)} to ${stringify(node.valueAfter)}`,
-  };
-
-  return typeToValue[type];
+const typeToString = {
+  nested: (name, { children }, render) => render(children, name),
+  unchanged: () => '',
+  added: (name, { valueAfter }) => `Property '${name.slice(1)}' was added with value: ${stringify(valueAfter)}\n`,
+  deleted: (name) => `Property '${name.slice(1)}' was deleted\n`,
+  changed: (name, { valueBefore, valueAfter }) => `Property '${name.slice(1)}' was changed from ${stringify(valueBefore)} to ${stringify(valueAfter)}\n`,
 };
 
-const renderDiff = (ast) => {
-  const iter = (node, acc, ancestry) => node.reduce((inAcc, inNode) => {
-    const { name, type } = inNode;
-    const newAncestry = `${ancestry}.${name}`;
+const renderDiff = (ast, ancestry) => ast.map((node) => {
+  const newAncestry = `${ancestry}.${node.name}`;
+  const renderNode = typeToString[node.type];
 
-    if (type === 'nested') {
-      return [...inAcc, iter(inNode.children, [], `${newAncestry}`)].join('');
-    }
-    if (type === 'unchanged') {
-      return inAcc;
-    }
+  return renderNode(newAncestry, node, renderDiff);
+}).join('');
 
-    return [...inAcc, `${renderNode(inNode, newAncestry.slice(1))}\n`].join('');
-  }, acc);
-
-  return iter(ast, [], '').trimEnd();
-};
-
-export default renderDiff;
+export default (diff) => `${renderDiff(diff, '').trimEnd()}`;
